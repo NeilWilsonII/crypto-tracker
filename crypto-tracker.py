@@ -61,3 +61,4 @@ totalCurrentValue = (algo[1] + district[1] + chain[1])
 MoneyUp = totalCurrentValue - totalBuyValue
 
 print(MoneyUp)
+print("x")
