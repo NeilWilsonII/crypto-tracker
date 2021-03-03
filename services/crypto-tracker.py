@@ -5,6 +5,7 @@ import json
 import time
 import io
 import lxml
+from flask import Flask, redirect, url_for, render_template
 
 def getCoin(coinName, buyIn, quantity):
     url='https://coinmarketcap.com/currencies/{0}/'.format(coinName)
@@ -40,7 +41,7 @@ def getCoin(coinName, buyIn, quantity):
     precentSymbol = (str(percentUp), "%")
 
     print(percentUp)
-    return(buyValue, totalCurrentValue)
+    return(buyValue, totalCurrentValue, coinPrice)
 
 
 #1.26 1.43 1.0321 
@@ -62,3 +63,28 @@ MoneyUp = totalCurrentValue - totalBuyValue
 
 print(MoneyUp)
 print("x")
+
+
+app =Flask(__name__)
+
+
+@app.route("/")
+def home(name):
+    return render_template("index.html")
+
+@app.route("/ross")
+def ross():
+    district2 = getCoin("district0x", .2712, 177.30245)
+    return render_template("Rossindex.html", algoprice = district2[2])
+
+@app.route("/neil")
+def neil():
+    return render_template("Neilindex.html")
+
+@app.route("/dakotah")
+def dakotah():
+    return render_template("Dakotahindex.html")
+
+
+if __name__ == "__main__":
+    app.run()
